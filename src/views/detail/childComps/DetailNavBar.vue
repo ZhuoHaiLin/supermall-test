@@ -24,8 +24,10 @@ export default {
       }
   },
   methods: {
-      itemclick(idnex){
-          this.currentIndex=idnex
+      itemclick(index){
+          this.currentIndex=index
+          this.$emit('tabitemclick',index)
+          
 
       },backClick(){
           this.$router.back()

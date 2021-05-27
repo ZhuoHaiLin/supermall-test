@@ -16,7 +16,7 @@
         <div class="info-detail">
             <p>{{commentInfo.content}}</p>
             <div class="info-other">
-                <span class="date">{{commentInfo.created}}</span>
+                <span class="date">{{commentInfo.created | showDate}}</span>
                 <span>{{commentInfo.style}}</span>
             </div>
             <div class="info-imgs"> 
@@ -28,6 +28,7 @@
 </template>
 
 <script>
+  import {formatDate} from '@/common/utils'
     export default {
         props:{
             commentInfo:{
@@ -36,6 +37,14 @@
                     return {}
                 }
             }
+        },
+        filters:{
+          showDate(value){
+            let date =new Date(value*1000)
+            return formatDate(date,'yyyy-MM-dd')
+
+          }
+
         }
     }
 </script>

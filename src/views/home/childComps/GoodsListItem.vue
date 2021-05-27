@@ -1,7 +1,7 @@
 <template>
     <div class="goodsitem" @click="itemdetailClick">
         <!-- <img @load="imgClick" :src="goods.show.img" alt=""> @load="imgClick 图片加载监听事件 -->
-        <img  :src="goods.show.img" alt="">
+        <img  :src="shouImage" alt="">
         <div class="goods-info">
             <p>{{goods.title}}</p>
             <span class="price">¥{{goods.price}}</span>
@@ -26,6 +26,11 @@
                 this.$router.push({path:'/detail',query:{id:this.goods.iid}})
             }
         },
+        computed:{
+            shouImage(){
+                return this.goods.image || this.goods.show.img
+            }
+        }
     }
 </script>
 

@@ -1,13 +1,13 @@
 <template>
   <div id="home">
     <nav-tab class="nav-bar"><div slot="center">购物街</div></nav-tab>
-       <!-- <TabControl
-        class="tabcontrol"
+       <TabControl
+        class="tabcontrols"
         @tabClick="tabClick"
-        ref="tabcontrol1"
+        ref="tabControlone"
         v-show="isTabFixed"
         :titles="['流行', '新款', '精选']"
-      ></TabControl> -->
+      ></TabControl>
 
     <Scroll
       class="content"
@@ -31,7 +31,7 @@
       <FeatureView></FeatureView>
 
       <TabControl
-        ref="tabControl2"
+        ref="tabControltwo"
         @tabClick="tabClick"
         :titles="['流行', '新款', '精选']"
       ></TabControl>
@@ -103,10 +103,11 @@ export default {
     // this.$bus.$on('imgClick',()=>{
     //  this.$refs.scroll.refresh()
     // })
+   // this.tabClick(0)
   },
   methods: {
     swiperClick() {
-      this.tabOffsetTop=this.$refs.tabControl2.$el.offsetTop;
+      this.tabOffsetTop=this.$refs.tabControltwo.$el.offsetTop;
       // console.log(this.tabOffsetTop)
     },
 
@@ -144,8 +145,12 @@ export default {
         default:
           break;
       }
-      // this.$refs.tabControl1.currnindex=index
-      // this.$refs.tabControl2.currnindex=index
+
+     // if(this.$refs.tabControl1!==undefined){
+         this.$refs.tabControlone.currnindex=index
+         this.$refs.tabControltwo.currnindex=index
+    //  }
+     
     },
     loadMore() {
       this.getHomeGoodList(this.currentType);
@@ -174,7 +179,7 @@ export default {
 
 <style  scoped>
 #home {
-  height: 100vh;
+   height: 100vh;
    position: relative;
   /* padding-bottom: 44px; */
 }
@@ -182,11 +187,12 @@ export default {
   background-color: var(--color-tint);
   font-weight: 700;
   color: var(--color-background);
-  position: fixed;
+ 
+   position: fixed;
   left: 0;
   right: 0;
   top: 0;
-  z-index: 9;
+  z-index: 9; 
 }
 
 .content {
@@ -195,10 +201,15 @@ export default {
   bottom: 49px;
   left: 0;
   right: 0;
+
 }
 
-.tabcontrol {
-    position: relative;
+.tabcontrols {
+  
+    position: fixed;
+    top: 44px;
+    left: 0;
+    right: 0;
     z-index: 9;
 }
 .backtop {
