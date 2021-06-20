@@ -17,9 +17,8 @@
         </div>
         <!-- 右边布局 -->
         <div class="bar-item bar-right">
-            <div class="cart">加入购物车</div>
+            <div class="cart" @click="addToCart">加入购物车</div>
             <div class="buy">购买</div>
-
         </div>
     
     </div>
@@ -27,7 +26,12 @@
 
 <script>
     export default {
-        
+
+        methods: {
+          addToCart(){
+            this.$emit('addCart')
+          }
+        },
 
     }
 </script>
@@ -49,6 +53,7 @@
      display: flex;
 }
 
+/* >后代所有子元素 */
  .bar-item>div {
     flex: 1;
   }
@@ -62,19 +67,20 @@
     margin: 10px auto 3px;
     background: url("~assets/img/detail/detail_bottom.png") 0 0/100%;
   }
-.bar-left .service {
+ .bar-left .service {
     background-position:0 -54px;
   }
   .bar-left .shop {
     background-position:0 -98px;
   }
-   .bar-right {
+
+  .bar-right {
     font-size: 15px;
     color: #fff;
-    line-height: 58px;
+    line-height: 55px;
   }
 
-    .bar-right .cart {
+  .bar-right .cart {
     background-color: #ffe817;
     color: #333;
   }

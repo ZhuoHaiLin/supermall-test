@@ -16,7 +16,10 @@ export default {
   name: 'App',
   components: {
     MainTabBar
-  }
+  },
+  // mounted() {
+  //   console.log(this.$route)
+  // },
 }
 </script>
 

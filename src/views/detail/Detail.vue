@@ -9,10 +9,17 @@
     <DetailParamInfo  ref="paraminfo" :paramInfo="paramInfo"></DetailParamInfo>
     <DetailCommentInfo ref="commentinfo" :commentInfo="commentInfo"></DetailCommentInfo>
     <GoodsList  ref="recommend" :goodsList="recommendList"></GoodsList>
-
     </Scroll>
+  
+    <!-- 底部工具栏购物车的位置 -->
+    <DetailBottomBar @addCart="addCart"></DetailBottomBar>
 
-    <DetailBottomBar></DetailBottomBar>
+    <!-- 点击回到顶部 -->
+    <BackTop @backtop="backtopClick" v-show="showBackTop" class="backtop">
+      <img src="~assets/img/common/top.png" />
+    </BackTop>
+
+    <!-- <Toast :message="message" :show="show"></Toast> -->
 
     
   </div>
@@ -28,11 +35,12 @@ import DetailParamInfo from  './childComps/DetailParamInfo'
 import DetailCommentInfo from './childComps/DetailCommentInfo'
 import DetailBottomBar from './childComps/DetailBottomBar'
 
-
+import {backTopMixin}  from '@/common/mixin'
 
 import Scroll from 'common/scroll/Scroll'
 
 import GoodsList from '../home/childComps/GoodsList'
+// import Toast from  'common/toast/Toast'
 
 
 import { getDetail, Goods,Shop,GoodsParam,getRecommend } from "network/detail";
@@ -49,9 +57,12 @@ export default {
     Scroll,
     DetailCommentInfo,
     GoodsList,
-    DetailBottomBar
-   
+    DetailBottomBar,
+  
+  // 118
+  // 138
   },
+  mixins:[backTopMixin], //混合函数的使用
   data() {
     return {
       iid: "",
@@ -63,7 +74,9 @@ export default {
       commentInfo:{},
       recommendList:[],
       themeTopYs:[],
-      currentIndex:0 
+      currentIndex:0,
+      message:'',
+      show:false
     };
   },
 
@@ -165,10 +178,35 @@ export default {
         
       }
 
+      this.listenShowBackTop(position) //在混合函数js 里面 mixins:[backTopMixin]
 
- 
+    },
+
+    addCart(){
+      const  product = {}
+      product.image=this.topImages[0],
+      product.title=this.goods.title,
+      product.desc=this.goods.desc,
+      product.price=this.goods.nowPrice
+      product.iid=this.iid
+
+      // this.$store.cartList.push(product)
+    //  this.$store.commit('addCart', product)
+       this.$store.dispatch('addCart',product).then(res=>{
+        //  this.message=res
+        //  this.show=true
+        //  setTimeout(()=>{
+        //    this.show=false
+        //  },1500)
+
+        this.$toast.showMessage(res,1500)
+
+         console.log(res)
+       })
+
+
+      
     }
-
 
   },
 };
@@ -190,6 +228,12 @@ export default {
   }
 
   .content {
-  height: calc(100% - 44px);
+  height: calc(100% - 44px - 49px);
   }
+
+  .backtop {
+  position: fixed;
+  bottom: 55px;
+  right: 20px;
+}
 </style>

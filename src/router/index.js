@@ -1,3 +1,4 @@
+
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
@@ -13,6 +14,7 @@ const routes=[
     {
         path: '/',
         redirect: '/home'
+        // meta:{name:'home',isbool:true}
     },
     {
         path:'/home',
