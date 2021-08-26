@@ -1,10 +1,10 @@
 <template>
   <div id="app">
     <keep-alive exclude="Detail">
-    <router-view></router-view>
+       <router-view></router-view>
     </keep-alive>
     
-    <main-tab-bar></main-tab-bar>
+    <main-tab-bar v-if="this.$route.path!='/login'"></main-tab-bar>
    
   </div>
 </template>
@@ -17,6 +17,7 @@ export default {
   components: {
     MainTabBar
   },
+  
   // mounted() {
   //   console.log(this.$route)
   // },

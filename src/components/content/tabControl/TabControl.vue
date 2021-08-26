@@ -22,6 +22,7 @@
         },
         methods: {
             tabClick(index){
+
                 this.currnindex=index
                 this.$emit('tabClick',index)
             }

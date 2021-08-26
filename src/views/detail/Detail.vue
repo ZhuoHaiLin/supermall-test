@@ -146,6 +146,7 @@ export default {
     tabitemclick(index){
         // console.log(index)
         this.$refs.scroll.scrollTo(0, -this.themeTopYs[index], 200)
+        
     },
     contentScroll(position){
 
@@ -177,7 +178,8 @@ export default {
          }
         
       }
-
+      
+      //回到顶部的功能
       this.listenShowBackTop(position) //在混合函数js 里面 mixins:[backTopMixin]
 
     },

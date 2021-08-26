@@ -1,7 +1,7 @@
 <template>
     <div class="goodsitem" @click="itemdetailClick">
         <!-- <img @load="imgClick" :src="goods.show.img" alt=""> @load="imgClick 图片加载监听事件 -->
-        <img  v-lazy="shouImage" alt="">
+        <img  v-lazy="shouImage" :key="shouImage" alt="">
         <div class="goods-info">
             <p>{{goods.title}}</p>
             <span class="price">¥{{goods.price}}</span>
@@ -28,7 +28,7 @@
         },
         computed:{
             shouImage(){
-                return this.goods.image || this.goods.show.img
+                 return this.goods.img || this.goods.image || this.goods.show.img
             }
         }
     }
